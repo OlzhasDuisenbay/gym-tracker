@@ -1,0 +1,53 @@
+<div class="form-page">
+  <div class="form-card" style="max-width: 520px;">
+    <h2>{{ isEdit ? 'Edit Workout' : 'New Workout' }}</h2>
+    <p class="form-subtitle">{{ isEdit ? 'Update your workout details' : 'Log a new workout session' }}</p>
+
+    <div *ngIf="errorMsg" class="error-msg">{{ errorMsg }}</div>
+
+    <div class="form-group">
+      <label>Title</label>
+      <input [(ngModel)]="workout.title" name="title" placeholder="e.g. Morning Run" />
+    </div>
+
+    <div class="form-group">
+  <label>Exercise Type</label>
+  <select [(ngModel)]="workout.exercise_type" name="exercise_type">
+    <option value="">Select type...</option>
+    <option value="cardio">🏃 Cardio</option>
+    <option value="strength">💪 Strength</option>
+    <option value="flexibility">🧘 Flexibility</option>
+    <option value="sports">⚽ Sports</option>
+    <option value="other">🏋️ Other</option>
+  </select>
+</div>
+
+    <div class="form-group">
+  <label>Duration (minutes)</label>
+  <input [(ngModel)]="workout.duration" name="duration" type="number" 
+         placeholder="30" min="1"
+         (focus)="workout.duration = null!" />
+</div>
+
+<div class="form-group">
+  <label>Calories burned</label>
+  <input [(ngModel)]="workout.calories" name="calories" type="number" 
+         placeholder="300" min="0"
+         (focus)="workout.calories = null!" />
+</div>
+
+    <div class="form-group">
+      <label>Date</label>
+      <input [(ngModel)]="workout.date" name="date" type="date" />
+    </div>
+
+    <div class="form-group">
+      <label>Notes (optional)</label>
+      <textarea [(ngModel)]="workout.notes" name="notes" placeholder="How did it go?"></textarea>
+    </div>
+
+    <button class="btn-primary" (click)="onSubmit()">
+      {{ isEdit ? 'Update Workout' : 'Save Workout' }}
+    </button>
+  </div>
+</div>

@@ -1,0 +1,50 @@
+<div class="dashboard-page">
+  <div class="dashboard-header">
+    <div>
+      <h2>My Workouts</h2>
+      <span>{{ workouts.length }} workout{{ workouts.length !== 1 ? 's' : '' }} logged</span>
+    </div>
+    <a routerLink="/workout/new" class="btn-add">+ Add Workout</a>
+  </div>
+
+  <div *ngIf="errorMsg" class="error-msg">{{ errorMsg }}</div>
+
+  <div class="stats-row">
+    <div class="stat-card">
+      <div class="stat-number">{{ workouts.length }}</div>
+      <div class="stat-label">Total Workouts</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">{{ getTotalDuration() }}</div>
+      <div class="stat-label">Total Minutes</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">{{ getTotalCalories() }}</div>
+      <div class="stat-label">Total Calories</div>
+    </div>
+  </div>
+
+  <div *ngIf="workouts.length === 0" class="empty-state">
+    <div class="empty-icon">🏋️</div>
+    <h3>No workouts yet</h3>
+    <p>Add your first workout to get started!</p>
+  </div>
+
+  <div class="workouts-grid">
+    <div *ngFor="let w of workouts" class="workout-card">
+      <div class="workout-info">
+        <div class="workout-title">{{ w.title }}</div>
+        <div class="workout-meta">
+          <span class="badge badge-type">{{ w.exercise_type }}</span>
+          <span class="badge badge-duration">⏱ {{ w.duration }} min</span>
+          <span class="badge badge-calories">🔥 {{ w.calories }} kcal</span>
+          <span class="badge badge-date">📅 {{ w.date }}</span>
+        </div>
+      </div>
+      <div class="workout-actions">
+        <a [routerLink]="['/workout/edit', w.id]" class="btn-edit">Edit</a>
+        <button class="btn-delete" (click)="deleteWorkout(w.id!)">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
